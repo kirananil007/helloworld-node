@@ -1,0 +1,5 @@
+service:
+  name: harness-nodeapp
+  identifier: harnessnodeapp
+  orgIdentifier: default
+  projectIdentifier: default_project
