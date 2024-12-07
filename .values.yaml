@@ -3,3 +3,37 @@ service:
   identifier: harnessnodeapp
   orgIdentifier: default
   projectIdentifier: default_project
+  serviceDefinition:
+    spec:
+      manifests:
+        - manifest:
+            identifier: helloworldnodegithub
+            type: HelmChart
+            spec:
+              store:
+                type: Github
+                spec:
+                  connectorRef: harnessgitconnector
+                  gitFetchType: Branch
+                  folderPath: /
+                  repoName: helloworld-node
+                  branch: master
+              subChartPath: ""
+              valuesPaths:
+                - .values.yaml
+              skipResourceVersioning: false
+              enableDeclarativeRollback: false
+              helmVersion: V3
+              fetchHelmChartMetadata: false
+      artifacts:
+        primary:
+          primaryArtifactRef: <+input>
+          sources:
+            - spec:
+                connectorRef: kirandockerhub
+                imagePath: kiran007anil/harness-nodejs
+                tag: 0.0.1
+                digest: ""
+              identifier: harnessnodejs
+              type: DockerRegistry
+    type: NativeHelm
